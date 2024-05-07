@@ -1,19 +1,14 @@
-function combinationSum2(candidates, target) {
-  candidates.sort((a, b) => a - b);
-  const result = [];
-  backtrack([], 0, 0);
-  return result;
-  function backtrack(combination, start, sum) {
-    if (sum === target) {
-      result.push([...combination]);
-      return;
+function connect(root) {
+  if (!root) return root;
+  let levelStart = root;
+  while (levelStart) {
+    let curr = levelStart;
+    while (curr) {
+      if (curr.left) curr.left.next = curr.right;
+      if (curr.right && curr.next) curr.right.next = curr.next.left;
+      curr = curr.next;
     }
-    if (sum > target) return;
-    for (let i = start; i < candidates.length; i++) {
-      if (i > start && candidates[i] === candidates[i - 1]) continue;
-      combination.push(candidates[i]);
-      backtrack(combination, i + 1, sum + candidates[i]);
-      combination.pop();
-    }
+    levelStart = levelStart.left;
   }
+  return root;
 }
