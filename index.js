@@ -1,14 +1,10 @@
-function connect(root) {
-  if (!root) return root;
-  let levelStart = root;
-  while (levelStart) {
-    let curr = levelStart;
-    while (curr) {
-      if (curr.left) curr.left.next = curr.right;
-      if (curr.right && curr.next) curr.right.next = curr.next.left;
-      curr = curr.next;
+function removeDuplicates(nums) {
+  let index = 0;
+  for (let i = 1; i < nums.length; i++) {
+    if (nums[i] !== nums[index]) {
+      index++;
+      nums[index] = nums[i];
     }
-    levelStart = levelStart.left;
   }
-  return root;
+  return index + 1;
 }
