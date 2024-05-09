@@ -1,10 +1,6 @@
-function removeDuplicates(nums) {
-  let index = 0;
-  for (let i = 1; i < nums.length; i++) {
-    if (nums[i] !== nums[index]) {
-      index++;
-      nums[index] = nums[i];
-    }
-  }
-  return index + 1;
-}
+const pull = (arr, ...args) => {
+  let argState = Array.isArray(args[0]) ? args[0] : args;
+  let pulled = arr.filter((v, i) => !argState.includes(v));
+  arr.length = 0;
+  pulled.forEach((v) => arr.push(v));
+};
